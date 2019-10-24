@@ -1,7 +1,9 @@
 #include <iostream>
 #include <vector>
+#include <cassert>
 #include "BinaryInsertionSort.h"
 #include "Node.h"
+#include "LinkedList.h"
 using namespace std;
 
 int main() {
@@ -10,11 +12,14 @@ int main() {
     cin >> seed >> length;
     srand(seed);
 
+    LinkedList list;  //creating the linked list
+
     vector<int> v(length);
 
     // generate vector of random integers
     for (int i = 0; i < v.size(); i++) {
         v[i] = rand() % 100;
+        list.append(rand() % 100);    //appending values to the list
     }
 
     // binary insertion sort
