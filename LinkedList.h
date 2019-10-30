@@ -10,10 +10,12 @@
 class LinkedList{
 public:
     LinkedList();   //constructor
-    LinkedList(const LinkedList &list);
+    LinkedList(const LinkedList &list);  //copy constructor
     ~LinkedList();    //destructor
+    LinkedList& operator= ( const LinkedList &assignment );  //copy assignment operator
     void append(int item);
-    void InsertionSort(Node&);
+    void InsertionSort();
+    void print();
 
 private:
     Node * head;   //head of the list
