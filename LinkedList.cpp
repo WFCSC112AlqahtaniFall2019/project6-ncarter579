@@ -1,65 +1,61 @@
 //
 // Created by carte on 10/24/2019.
 //
-
-//472
-
 #include "LinkedList.h"
 using namespace std;
 #include <iostream>
 
-LinkedList::LinkedList() {
+LinkedList::LinkedList() {   //default constructor sets head equal to nullPtr
     head = nullptr;
 }
 
-LinkedList::LinkedList(const LinkedList &list) {
+LinkedList::LinkedList(const LinkedList &list) {      //copy constructor
     cout << "Copy constructor called" << endl;
-
     Node* listCurr = list.head; // Head of original list
-    Node* listCopy = head; // Head of other list
-    while(listCurr->next != nullptr){
-        listCopy->next = new Node(listCurr->next->value);
-        listCopy = listCopy->next;
+    Node* listCopy = head;  // Head of the copy list
+    while(listCurr->next != nullptr){    //goes until the end of the list
+        listCopy->next = new Node(listCurr->next->value);     //creates a new node in the copy list with the data from the curr list
+        listCopy = listCopy->next;    //iterates through the two lists
         listCurr = listCurr ->next;
     }
 }
 
-LinkedList &LinkedList::operator=(const LinkedList &assignment) {
+LinkedList &LinkedList::operator=(const LinkedList &assignment) {     //copy assignment operator
    cout << "Copy Assignment Operator Called" << endl;
 
-   LinkedList obj;
-   swap(obj.head, head);
+   LinkedList obj;             //creating a new object
+   swap(obj.head, head);           //swaping
    return *this;
 }
 
-LinkedList::~LinkedList() {
+LinkedList::~LinkedList() {               //destructor function
     cout << "Destructor called." << endl;
-    Node* curr = head;
+    Node* curr = head;     //creating nodes to traverse the list
     Node* after = curr->next;
-    while(curr->next != nullptr){
-        delete(curr);
-        curr = after;
-        after = after->next;
+    while(curr->next != nullptr){      //do this until curr gets to the end of the list
+        delete(curr);      //delete curr
+        curr = after;   //sets curr equal to after
+        after = after->next;     //iterates after one ahead of curr
     }
 }
 
-void LinkedList::append(int item) {
-    if(head == nullptr){
-        head = new Node(item);
-        size++;
+void LinkedList::append(int item) {   //this function adds new nodes onto the linked list
+    if(head == nullptr){       //if there are no nodes in the list
+        head = new Node(item);    //sets head equal to the new node
+        size++;   //iterates size
     }
-    else{
-        Node* current = head;
-        while(current->next != nullptr){
-            current = current->next;
+    else{       //if you are adding onto another node in the list
+        Node* current = head;     //creating a node to traverse the list
+        while(current->next != nullptr){     //gets current to the end of the list
+            current = current->next;     //iterates current
         }
-        current -> next = new Node(item);
-        size++;
+        current -> next = new Node(item);    //creating a new node at the end of the list
+        size++;    //iterates size
     }
 }
 
 void LinkedList::InsertionSort() {
-    Node *curr = head->next;
+    Node *curr = head->next;      //creating the nodes used to traverse the linked list
     Node *prev = head;
     Node *check = head;
     if (head->next == nullptr || curr->next == nullptr) {   //checking to see if their are any values in the list or only 1 value in the list
@@ -73,7 +69,6 @@ void LinkedList::InsertionSort() {
         } else {         //do this if the values need to be rearranged
             if (head->value > curr->value) {      //if head's value is greater then curr's value
                 prev->next = curr->next;      //sets prev's next equal to curr's next
-                curr->next = nullptr;       //set's curr's next equal to nullPtr because it is no longer used
                 curr->next = head;     //sets curr's next equal to the head
                 head = curr;            //sets curr's value equal to head
             } else {
@@ -82,7 +77,6 @@ void LinkedList::InsertionSort() {
                     check = check->next;   //iterate check through the list
                 }
                 prev->next = curr->next;     //when it reaches a value that must be swapped set prev's next equal to curr's next
-                curr->next = nullptr;       //set curr's next equal to nullPtr because its no longer needed
                 curr->next = check->next;     //set curr's next equal to check's next
                 check->next = curr;              //set check's next equal to curr
             }
@@ -91,32 +85,10 @@ void LinkedList::InsertionSort() {
     }
 }
 
-void LinkedList::print() {
-    Node * cursor = head;
-    while ( cursor != nullptr ){
-        cout << cursor->value << " ";
-        cursor = cursor -> next ;
+void LinkedList::print() {      //print function for the linked list
+    Node * cursor = head;        //creates node to traverse the list
+    while ( cursor != nullptr ){    //goes until the end of the list
+        cout << cursor->value << " ";    //prints the value and then a space following
+        cursor = cursor -> next ;     //iterates cursor
     }
 }
-
-
-
-
-
-
-
-
-
-    /*
-    int i = 1;
-    Node* temp;
-    Node* curr;
-    curr = head->next;
-    while(i < size){
-        temp = head->next;
-        curr = head->next;
-        if(temp->value > curr->value ){
-
-        }
-    }
-     */

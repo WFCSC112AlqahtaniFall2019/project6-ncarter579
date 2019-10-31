@@ -13,13 +13,11 @@ public:
     LinkedList(const LinkedList &list);  //copy constructor
     ~LinkedList();    //destructor
     LinkedList& operator= ( const LinkedList &assignment );  //copy assignment operator
-    void append(int item);
-    void InsertionSort();
-    void print();
+    void append(int item);   //append function
+    void InsertionSort();    //InsertionSort
+    void print();        //print function
 
 private:
     Node * head;   //head of the list
-    int size = 0;
-
-
+    int size = 0;    //sets default size of list to zero
 };
